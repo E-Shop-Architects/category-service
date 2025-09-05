@@ -36,6 +36,8 @@ public class GetListCategoryQuery : IRequest<GetListResponse<GetListCategoryList
 
         public async Task<GetListResponse<GetListCategoryListItemDto>> Handle(GetListCategoryQuery request, CancellationToken cancellationToken)
         {
+
+
             Paginate<Category> categories = await _categoryRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
