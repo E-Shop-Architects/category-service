@@ -1,4 +1,5 @@
 ﻿using Application.Services.Repositories;
+using CategoryService.Services;
 using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
@@ -36,7 +37,8 @@ public static class ApplicationServiceRegistration
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
-        services.AddSingleton<LoggerServiceBase, MsSqlLogger>();
+        services.AddSingleton<RabbitMQPublisher>();
+        services.AddSingleton<LoggerServiceBase, Core.CrossCuttingConcerns.Logging.Serilog.SerilogLogger>();
 
         return services;
     }

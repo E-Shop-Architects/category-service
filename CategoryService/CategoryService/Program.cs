@@ -11,18 +11,22 @@ using Persistence; // Eğer CategoryService.Services içinde Persistence katman�
 using Persistence.Context;
 using Serilog;
 using Serilog.AspNetCore;
-// ✅ Serilog için gerekli using'ler
+using System.Net; // Dns sınıfı için ekleyin
+
+using Serilog.Formatting.Json;
 using Serilog.Settings.Configuration;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using WebAPI; // Eğer WebAPI katmanınız varsa (genellikle Program.cs'nin bulunduğu katman)
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Serilog yapılandırması (mevcut hali korunuyor)
+// Serilog yapılandırması
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
     .CreateLogger();
+
+
 
 builder.Host.UseSerilog();
 
